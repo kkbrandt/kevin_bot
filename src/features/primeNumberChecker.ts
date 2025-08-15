@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
 import { isPrime, parseNumber, generatePrimeResponse } from '../utils/primeUtils.js';
 
-const PRIME_CHANNEL_NAME = 'prime_numbers_only';
+const PRIME_CHANNEL_NAME = 'prime-numbers-only';
 
 /**
  * Process a Discord message and determine if we should reply
