@@ -1,9 +1,9 @@
 /**
  * Check if a number is prime
- * @param {number} num - The number to check
- * @returns {boolean} - True if the number is prime, false otherwise
+ * @param num - The number to check
+ * @returns True if the number is prime, false otherwise
  */
-function isPrime(num) {
+export function isPrime(num: number): boolean {
     // Handle edge cases
     if (num < 2) return false;
     if (num === 2) return true;
@@ -19,10 +19,10 @@ function isPrime(num) {
 
 /**
  * Parse a message to extract a number
- * @param {string} message - The message to parse
- * @returns {number|null} - The parsed number or null if not a valid number
+ * @param message - The message to parse
+ * @returns The parsed number or null if not a valid number
  */
-function parseNumber(message) {
+export function parseNumber(message: string): number | null {
     const trimmed = message.trim();
     
     // Check if it's a valid number (integer or float)
@@ -42,20 +42,14 @@ function parseNumber(message) {
 
 /**
  * Generate a response message for a prime check
- * @param {number} num - The number that was checked
- * @param {boolean} isPrimeResult - Whether the number is prime
- * @returns {string} - The response message
+ * @param num - The number that was checked
+ * @param isPrimeResult - Whether the number is prime
+ * @returns The response message
  */
-function generatePrimeResponse(num, isPrimeResult) {
+export function generatePrimeResponse(num: number, isPrimeResult: boolean): string {
     if (isPrimeResult) {
         return `✅ ${num} is a prime number! 🎉`;
     } else {
         return `❌ ${num} is not a prime number.`;
     }
 }
-
-module.exports = {
-    isPrime,
-    parseNumber,
-    generatePrimeResponse
-};
