@@ -32,6 +32,12 @@ export function handlePrimeMessage(
         return null;
     }
     
+    // Check if the number is too large
+    if (number > 500000) {
+        console.log(`🚫 Number ${number} is too large for prime checking!`);
+        return "Whoah! That's a big number. Sorry, I don't know how to count that high yet 😭";
+    }
+    
     // Check if the number is prime
     const primeResult = isPrime(number);
     const response = generatePrimeResponse(number, primeResult);
