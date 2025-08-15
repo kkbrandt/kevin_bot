@@ -14,9 +14,6 @@ const client = new Client({
     ]
 });
 
-// Channel name to monitor (configurable)
-const PRIME_CHANNEL_NAME = process.env.PRIME_CHANNEL_NAME || 'prime numbers only';
-
 // When the client is ready, run this code
 client.once('ready', () => {
     if (!client.user) {
@@ -25,18 +22,21 @@ client.once('ready', () => {
     }
     
     console.log(`✅ Bot is ready! Logged in as ${client.user.tag}`);
-    console.log(`🔍 Monitoring channel: "${PRIME_CHANNEL_NAME}"`);
 });
 
 // Listen for messages
 client.on('messageCreate', async (message) => {
     try {
-        // Get the reply content from our handler
-        const replyContent = handlePrimeMessage(message);
+         // Ignore messages from bots
+        if (message.author.bot) {
+            return null;
+        }
+        console.log("New message received: ", message.content);
         
-        // If we have a reply, send it
-        if (replyContent) {
-            await message.reply(replyContent);
+        // If the message is a number in the prime channel, get a response.
+        const primeResponse = handlePrimeMessage(message);
+        if (primeResponse) {
+            await message.reply(primeResponse);
         }
     } catch (error) {
         console.error('Error handling message:', error);

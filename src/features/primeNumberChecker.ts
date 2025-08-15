@@ -12,21 +12,17 @@ const PRIME_CHANNEL_NAME = 'prime_numbers_only';
 export function handlePrimeMessage(
     message: Message, 
 ): string | null {
-    // Ignore messages from bots
-    if (message.author.bot) {
-        return null;
-    }
     
     // Check if message is in the target channel
     if (message.channel.type !== 0) { // Not a guild text channel
         return null;
     }
-    const channelName = (message.channel as any).name?.toLowerCase();
-    if (channelName !== PRIME_CHANNEL_NAME.toLowerCase()) {
+    console.log("New message in channel: ", message.channel.name);
+    if (message.channel.name !== PRIME_CHANNEL_NAME) {
         return null;
     }
     
-    console.log(`📝 Message in ${channelName}: "${message.content}"`);
+    console.log(`📝 Message content: "${message.content}"`);
     
     // Try to parse the message as a number
     const number = parseNumber(message.content);
