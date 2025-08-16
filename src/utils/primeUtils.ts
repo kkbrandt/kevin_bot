@@ -1,7 +1,7 @@
 import { checkPrimeSync } from 'crypto';
 
 const MAX_DIGITS_FOR_SMALL_PRIME = 6;
-const MAX_DIGITS_FOR_LARGE_PRIME = 100;
+const MAX_DIGITS_FOR_LARGE_PRIME = 10000;
 
 /**
  * Result of a prime check operation
