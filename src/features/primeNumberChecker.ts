@@ -28,8 +28,8 @@ export function handlePrimeMessage(
     const number = parseNumber(message.content);
     
     if (number === null) {
-        console.log(`${message.content} is not a valid number or is too large (>40 digits)!`);
-        return "Whoah! That's a big number. Sorry, I don't know how to count that high yet 😭";
+        console.log(`${message.content} is not a valid number!`);
+        return null;
     }
     
     // Check if the number is prime using tiered approach
@@ -42,6 +42,6 @@ export function handlePrimeMessage(
         return response;
     } catch (error) {
         console.log(`🚫 Error processing number ${number}: ${error}`);
-        return "Whoah! That's a big number. Sorry, I don't know how to count that high yet 😭";
+        return "Whoah! That's a REALLY big number. Sorry, I don't know how to count that high yet 😭";
     }
 }
