@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import { isPrime, parseNumber, generatePrimeResponse } from '../utils/primeUtils.js';
+import { isPrime, parseNumber, generatePrimeResponse } from '../utils/primeUtils';
 
 const PRIME_CHANNEL_NAME = 'prime-numbers-only';
 
@@ -28,21 +28,20 @@ export function handlePrimeMessage(
     const number = parseNumber(message.content);
     
     if (number === null) {
-        console.log(`${message.content} is not a valid number!`);
-        return null;
-    }
-    
-    // Check if the number is too large
-    if (number > 500000) {
-        console.log(`🚫 Number ${number} is too large for prime checking!`);
+        console.log(`${message.content} is not a valid number or is too large (>40 digits)!`);
         return "Whoah! That's a big number. Sorry, I don't know how to count that high yet 😭";
     }
     
-    // Check if the number is prime
-    const primeResult = isPrime(number);
-    const response = generatePrimeResponse(number, primeResult);
-    
-    console.log(`🧮 ${number} is ${primeResult ? 'prime' : 'not prime'}!`);
-    
-    return response;
+    // Check if the number is prime using tiered approach
+    try {
+        const primeResult = isPrime(number);
+        const response = generatePrimeResponse(number, primeResult);
+        
+        console.log(`🧮 ${number} is ${primeResult.isPrime ? 'prime' : 'not prime'}! (Method: ${primeResult.method})`);
+        
+        return response;
+    } catch (error) {
+        console.log(`🚫 Error processing number ${number}: ${error}`);
+        return "Whoah! That's a big number. Sorry, I don't know how to count that high yet 😭";
+    }
 }
