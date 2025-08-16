@@ -12,23 +12,16 @@ const PRIME_CHANNEL_NAME = 'prime-numbers-only';
 export function handlePrimeMessage(
     message: Message, 
 ): string | null {
-    
     // Check if message is in the target channel
-    if (message.channel.type !== 0) { // Not a guild text channel
+    if (message.channel.type !== 0 || message.channel.name !== PRIME_CHANNEL_NAME) {
         return null;
     }
-    console.log("New message in channel: ", message.channel.name);
-    if (message.channel.name !== PRIME_CHANNEL_NAME) {
-        return null;
-    }
-    
-    console.log(`📝 Message content: "${message.content}"`);
     
     // Try to parse the message as a number
     const number = parseNumber(message.content);
     
     if (number === null) {
-        console.log(`${message.content} is not a valid number!`);
+        console.log(`Message is not a valid number.`);
         return null;
     }
     
@@ -42,6 +35,6 @@ export function handlePrimeMessage(
         return response;
     } catch (error) {
         console.log(`🚫 Error processing number ${number}: ${error}`);
-        return "Whoah! That's a REALLY big number. Sorry, I don't know how to count that high yet 😭";
+        return "Something went wrong. Is the number too big?";
     }
 }

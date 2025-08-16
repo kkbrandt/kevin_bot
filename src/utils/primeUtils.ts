@@ -97,7 +97,8 @@ function checkLargePrime(num: bigint): PrimeCheckResult {
  * @returns The parsed BigInt or null if not a valid number
  */
 export function parseNumber(message: string): bigint | null {
-    const trimmed = message.trim();
+    // remove all whitespace, commas, and periods from text
+    const trimmed = message.replace(/[\s,.]/g, '');
     
     // Check if it's a valid number (integer only for prime checking)
     if (!/^-?\d+$/.test(trimmed)) {
